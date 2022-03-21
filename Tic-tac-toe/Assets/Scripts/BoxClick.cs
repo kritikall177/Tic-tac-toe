@@ -35,7 +35,7 @@ public class BoxClick : MonoBehaviour
                 mark.typeMark = 'x';
             }
             mark.status = true;
-            if(Global.CheckMark()) Global.PauseGame();
+            if(Global.CheckMark() | Global.IfStandoff()) Global.PauseGame();
         }
     }
     void Start()

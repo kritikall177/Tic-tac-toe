@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Global : MonoBehaviour
 {
     public static Sprite lastSprite = null;
     public static GameObject[] allBoxes;
+    public static GameObject matchResult;
     
     public static bool CheckMark()
     {
@@ -17,12 +19,25 @@ public class Global : MonoBehaviour
 
         return false;
     }
+
+    public static bool IfStandoff()
+    {
+        foreach(var box in allBoxes) if (box.GetComponent<BoxClick>().mark.status == false) return false;
+        Print("Ничья");
+        return true;
+    }
+
+    public static void Print(string str)//вывести в отдельный скрипт на самом тексте
+    {
+        matchResult.GetComponent<TextMeshProUGUI>().text = str;
+    }
+
     public static bool CheckWin(int a, int b, int c)
     {
         char[] players = {'x','o' };
         foreach (var ch in players) if (allBoxes[a].GetComponent<BoxClick>().mark.typeMark == ch && allBoxes[b].GetComponent<BoxClick>().mark.typeMark == ch && allBoxes[c].GetComponent<BoxClick>().mark.typeMark == ch)
             {
-                Debug.Log($"{char.ToUpper(ch)} Wins!");
+                Print($"{char.ToUpper(ch)} Победил!");
                 return true;
             }
         return false;
@@ -42,6 +57,7 @@ public class Global : MonoBehaviour
     void Start()
     {
         allBoxes = GameObject.FindGameObjectsWithTag("Box");
+        matchResult = GameObject.FindGameObjectWithTag("Text");
         for (byte i = 0;i < allBoxes.Length;i++)
         {
             allBoxes[i].GetComponent<BoxClick>().index = i;
