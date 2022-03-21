@@ -21,7 +21,6 @@ public class BoxClick : MonoBehaviour
         if (mark.status == true);
         else
         {
-            Debug.Log("Поинт");
             if (Global.lastSprite == spriteX)
             {
                 GetComponent<SpriteRenderer>().sprite = spriteO;
