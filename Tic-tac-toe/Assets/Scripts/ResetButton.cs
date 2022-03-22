@@ -10,7 +10,8 @@ public class ResetButton : MonoBehaviour
         {
             box.GetComponent<BoxClick>().mark = default;
             box.GetComponent<SpriteRenderer>().sprite = null;
-            Global.Print("");
+            Global.lastSprite = null;
+            Global.PrintText("");
         }
     }
 }

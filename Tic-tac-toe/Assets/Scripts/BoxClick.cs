@@ -4,44 +4,35 @@ using UnityEngine;
 
 public class BoxClick : MonoBehaviour
 {
-    public struct Mark
+    public struct BoxStatus
     {
-        public bool status { get; set; }
-        public char typeMark { get; set; }
+        public bool Status { get; set; }
+        public char TypeMark { get; set; }
     }
 
-    public Sprite noneSprite;
-    public Sprite spriteX;
-    public Sprite spriteO;
-    public Mark mark;
-    public byte index;
+    public Sprite SpriteX;
+    public Sprite SpriteO;
+    public byte Index { get; set; }
+    public BoxStatus mark;
 
     public void OnMouseDown()
     {
-        if (mark.status == true);
-        else
+        if(!mark.Status)
         {
-            if (Global.lastSprite == spriteX)
+            if (Global.lastSprite == SpriteX)
             {
-                GetComponent<SpriteRenderer>().sprite = spriteO;
-                Global.lastSprite = spriteO;
-                mark.typeMark = 'o';
+                GetComponent<SpriteRenderer>().sprite = SpriteO;
+                Global.lastSprite = SpriteO;
+                mark.TypeMark = 'o';
             }
-            else if (Global.lastSprite == spriteO | Global.lastSprite == null)
+            else if (Global.lastSprite == SpriteO | Global.lastSprite == null)
             {
-                GetComponent<SpriteRenderer>().sprite = spriteX;
-                Global.lastSprite = spriteX;
-                mark.typeMark = 'x';
+                GetComponent<SpriteRenderer>().sprite = SpriteX;
+                Global.lastSprite = SpriteX;
+                mark.TypeMark = 'x';
             }
-            mark.status = true;
-            if(Global.CheckMark() | Global.IfStandoff()) Global.PauseGame();
+            mark.Status = true;
+            if(Global.CheckMark() || Global.IfStandoff()) Global.PauseGame();
         }
-    }
-    void Start()
-    {
-    }
-
-    void Update()
-    {
     }
 }
