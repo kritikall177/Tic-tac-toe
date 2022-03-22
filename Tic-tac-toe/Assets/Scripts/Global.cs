@@ -53,7 +53,7 @@ public class Global : MonoBehaviour
         allBoxes = GameObject.Find("Board").GetComponentsInChildren<BoxClick>();
         for (byte i = 0; i < allBoxes.Length; i++)
         {
-            allBoxes[i].index = i;
+            allBoxes[i].Index = i;
         }
 
     }

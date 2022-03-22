@@ -12,7 +12,7 @@ public class BoxClick : MonoBehaviour
 
     public Sprite SpriteX;
     public Sprite SpriteO;
-    public byte index;
+    public byte Index { get; set; }
     public BoxStatus mark;
 
     public void OnMouseDown()
