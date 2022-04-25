@@ -12,27 +12,35 @@ public class BoxClick : MonoBehaviour
 
     public Sprite SpriteX;
     public Sprite SpriteO;
-    public byte Index { get; set; }
     public BoxStatus mark;
+    private byte _index;
 
+    public static BoxClick[] SetStartIndex(BoxClick[] allBoxes)
+    {
+        for (byte i = 0; i < allBoxes.Length; i++)
+        {
+            allBoxes[i]._index = i;
+        }
+
+        return allBoxes;
+    }
+    
     public void OnMouseDown()
     {
-        if(!mark.Status)
+        if (mark.Status) return;
+        if (Global.LastSprite == SpriteX)
         {
-            if (Global.lastSprite == SpriteX)
-            {
-                GetComponent<SpriteRenderer>().sprite = SpriteO;
-                Global.lastSprite = SpriteO;
-                mark.TypeMark = 'o';
-            }
-            else if (Global.lastSprite == SpriteO | Global.lastSprite == null)
-            {
-                GetComponent<SpriteRenderer>().sprite = SpriteX;
-                Global.lastSprite = SpriteX;
-                mark.TypeMark = 'x';
-            }
-            mark.Status = true;
-            if(Global.CheckMark() || Global.IfStandoff()) Global.PauseGame();
+            GetComponent<SpriteRenderer>().sprite = SpriteO;
+            Global.LastSprite = SpriteO;
+            mark.TypeMark = 'o';
         }
+        else if (Global.LastSprite == SpriteO | Global.LastSprite == null)
+        {
+            GetComponent<SpriteRenderer>().sprite = SpriteX;
+            Global.LastSprite = SpriteX;
+            mark.TypeMark = 'x';
+        }
+        mark.Status = true;
+        if(Global.CheckMark() || Global.IfStandoff()) Global.PauseGame();
     }
 }
